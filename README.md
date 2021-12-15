@@ -1,4 +1,4 @@
-# Plantclicker #game
-The real Plant Clicker!
+# Christmas Clicker #game
+The real Christmas Clicker!
 
-🌱
+🎄❄
