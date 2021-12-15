@@ -1,5 +1,5 @@
 
-let plants = 0;
+let snowballs = 0;
 
 let cursorCost = 15;
 let cursors = 0;
@@ -16,14 +16,14 @@ let clickingPower = 1;
 
 
 function buyCursor() {
-	if (plants >= cursorCost) {
-		plants = plants - cursorCost;
+	if (snowballs >= cursorCost) {
+		snowballs = snowballs - cursorCost;
 		cursors = cursors + 1;
 		cursorCost = Math.round(cursorCost * 1.15);
 
 		
 
-		document.getElementById("plants").innerHTML = plants;
+		document.getElementById("snowballs").innerHTML = snowballs;
 		document.getElementById("cursorcost").innerHTML = cursorCost;
 		document.getElementById("cursors").innerHTML = cursors;
 		updateScorePerSecond();
@@ -33,12 +33,12 @@ function buyCursor() {
 
 
 function buyGardener() {
-	if (plants >= gardenerCost) {
-		plants = plants - gardenerCost;
+	if (snowballs >= gardenerCost) {
+		snowballs = snowballs - gardenerCost;
 		gardeners = gardeners + 1;
 		gardenerCost = Math.round(gardenerCost * 1.15);
 
-		document.getElementById("plants").innerHTML = plants;
+		document.getElementById("snowballs").innerHTML = snowballs;
 		document.getElementById("gardenercost").innerHTML = gardenerCost;
 		document.getElementById("gardeners").innerHTML = gardeners;
 		updateScorePerSecond();
@@ -47,12 +47,12 @@ function buyGardener() {
 
 
 function buyFertilizer() {
-	if (plants >= fertilizerCost) {
-		plants = plants - fertilizerCost;
+	if (snowballs >= fertilizerCost) {
+		snowballs = snowballs - fertilizerCost;
 		fertilizers = fertilizers + 1;
 		fertilizerCost = Math.round(fertilizerCost * 1.15);
 
-		document.getElementById("plants").innerHTML = plants;
+		document.getElementById("snowballs").innerHTML = snowballs;
 		document.getElementById("fertilizercost").innerHTML = fertilizerCost;
 		document.getElementById("fertilizers").innerHTML = fertilizers;
 		updateScorePerSecond();
@@ -61,10 +61,10 @@ function buyFertilizer() {
 
 
 document.getElementById("btn").onclick = function () {
-	plants += clickingPower;
+	snowballs += clickingPower;
 
 	
-	document.getElementById("plants").innerHTML = plants;
+	document.getElementById("snowballs").innerHTML = snowballs;
 }
 
 
@@ -79,8 +79,8 @@ myStorage = window.localStorage;
 
 function loadGame() {
 	var savedGame = JSON.parse(myStorage.getItem("gameSave"));
-	if (typeof savedGame.plants !== "undefined") {
-		plants = savedGame.plants; 
+	if (typeof savedGame.snowballs !== "undefined") {
+		snowballs = savedGame.snowballs; 
 	}
 	if (typeof savedGame.clickingPower !== "undefined") {
 		clickingPower = savedGame.clickingPower;
@@ -103,7 +103,7 @@ function loadGame() {
 	if (typeof savedGame.fertilizers !== "undefined") {
 		fertilizers = savedGame.fertilizers;
 	}
-	document.getElementById("plants").innerHTML = plants;
+	document.getElementById("snowballs").innerHTML = snowballs;
 	document.getElementById("cursorcost").innerHTML = cursorCost;
 	document.getElementById("cursors").innerHTML = cursors;
 	document.getElementById("gardenercost").innerHTML = gardenerCost;
@@ -120,7 +120,7 @@ window.onload = function() {
 
 function saveGame() {
 	var gameSave = {
-		plants: plants,
+		snowballs: snowballs,
 		clickingPower: clickingPower,
 		cursorCost: cursorCost,
 		cursors: cursors,
@@ -137,7 +137,7 @@ function resetGame() {
 	
 	var gameSave = { };
 	myStorage.setItem("gameSave", JSON.stringify(gameSave));
-	document.getElementById("plants").innerHTML = plants;
+	document.getElementById("snowballs").innerHTML = snowballs;
 	document.getElementById("cursorcost").innerHTML = cursorCost;
 	document.getElementById("cursors").innerHTML = cursors;
 	document.getElementById("gardenercost").innerHTML = gardenerCost;
@@ -150,13 +150,13 @@ function resetGame() {
 
 
 setInterval(function() {
-	plants = plants + cursors;
-	plants = plants + fertilizers * 5;
-	plants = plants + gardeners * 13;
-	document.getElementById("plants").innerHTML = plants;
+	snowballs = snowballs + cursors;
+	snowballs = snowballs + fertilizers * 5;
+	snowballs = snowballs + gardeners * 13;
+	document.getElementById("snowballs").innerHTML = snowballs;
 
 
-	document.title = plants + " plants - Plant Clicker";
+	document.title = snowballs + " snowballs - Plant Clicker";
 }, 1000);
 
 

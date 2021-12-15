@@ -1,26 +1,26 @@
 var game = {
-	plants: 0,
-	totalplants: 0,
+	snowballs: 0,
+	totalSnowballs: 0,
 	totalClicks: 0,
 	clickValue: 1,
 	version: 0.001,
 
 
-	addToplants: function(amount) {
-		this.plants += amount;
-		this.totalplants += amount;
-		display.updateplants();
+	addTosnowballs: function(amount) {
+		this.snowballs += amount;
+		this.totalSnowballs += amount;
+		display.updatesnowballs();
 
 	},
 
-	getplantsPerSecond: function() {
-		var plantsPerSecond = 0;
+	getsnowballsPerSecond: function() {
+		var snowballsPerSecond = 0;
 		for (i = 0; i < building.name.length; i++) {
-			plantsPerSecond += building.income[i] * building.count[i];
+			snowballsPerSecond += building.income[i] * building.count[i];
 
 		}
 		
-		return plantsPerSecond;
+		return snowballsPerSecond;
 
 	}
 
@@ -36,11 +36,11 @@ var building = {
 
 
 	purchase: function(index) {
-		if (game.plants >= this.cost[index]) {
-			game.plants -= this.cost[index];
+		if (game.snowballs >= this.cost[index]) {
+			game.snowballs -= this.cost[index];
 			this.count[index]++;
 			this.cost[index] = Math.ceil(this.cost[index] * 1.10);
-			display.updateplants();
+			display.updatesnowballs();
 			display.updateShop();
 			display.updateUpgrades();
 		}
@@ -64,12 +64,12 @@ var upgrade = {
 		"4x Better and shinier than Gold Cursors",
 		"Your Clicks will be doubled!",
 		"This bad boy, gives your clicks 4x more than previous!",
-		"Turn all your plants into GOLD!",
+		"Turn all your snowballs into GOLD!",
 		"Farms are now 6x goldier than before!",
 		"MY GOD, THATS POWERFUL!",
 		"MY GOD, THATS EVEN MORE POWERFUL!!!!",
 		"Water filled fertilizers",
-		"Shiny plants!!!!"
+		"Shiny snowballs!!!!"
 	],
 	image: [
 		"big_gold_cursor.png",
@@ -157,37 +157,37 @@ var upgrade = {
 		false
 	],
 	purchase: function(index) {
-		if (!this.purchased[index] && game.plants >= this.cost[index]) {
+		if (!this.purchased[index] && game.snowballs >= this.cost[index]) {
 			if (this.type[index] == "building" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
-				game.plants -= this.cost[index];
+				game.snowballs -= this.cost[index];
 				building.income[this.buildingIndex[index]] *= this.bonus[index];
 				this.purchased[index] = true;
 				 
 				display.updateUpgrades();
-				display.updateplants();
+				display.updatesnowballs();
 			} else if (this.type[index] == "click" && game.totalClicks >= this.requirement[index]) {
-				game.plants -= this.cost[index];
+				game.snowballs -= this.cost[index];
 				game.clickValue *= this.bonus[index];
 				this.purchased[index] = true;
 				 
 				display.updateUpgrades();
-				display.updateplants();
+				display.updatesnowballs();
 			}
 		}
 	},
 };
 
 var display = {
-	updateplants: () => {
-		document.getElementById("plants").innerHTML = game.plants;
-		document.getElementById("plantsPerSecond").innerHTML = game.getplantsPerSecond();
-		document.title = game.plants + " plants - Christmas Clicker"; 
+	updatesnowballs: () => {
+		document.getElementById("snowballs").innerHTML = game.snowballs;
+		document.getElementById("snowballsPerSecond").innerHTML = game.getsnowballsPerSecond();
+		document.title = game.snowballs + " snowballs - Christmas Clicker"; 
 	},
 
 	updateShop: () => {
 		document.getElementById("shopContainer").innerHTML = "";
 		for (i = 0; i < building.name.length; i++) {
-			document.getElementById("shopContainer").innerHTML += '<table class="shopButton" onclick="building.purchase('+i+')"><tr><td id="image"><img src="'+building.image[i]+'"></td><td id="nameAndCost"><p id="zeros">'+building.name[i]+'</p><p>'+building.cost[i]+'<span id="zeros"> plants</span></p></td><td id="amount"><span>'+building.count[i]+'</span></td></tr></table>';
+			document.getElementById("shopContainer").innerHTML += '<table class="shopButton" onclick="building.purchase('+i+')"><tr><td id="image"><img src="'+building.image[i]+'"></td><td id="nameAndCost"><p id="zeros">'+building.name[i]+'</p><p>'+building.cost[i]+'<span id="zeros"> snowballs</span></p></td><td id="amount"><span>'+building.count[i]+'</span></td></tr></table>';
 		}
 	},
 
@@ -195,9 +195,9 @@ var display = {
 		for(i = 0; i < upgrade.name.length; i++) {
 			if(!upgrade.purchased[i]) {
 				if(upgrade.type[i] == "building" && building.count[upgrade.buildingIndex[i]] >= upgrade.requirement[i]) {
-					document.getElementById("upgradeContainer").innerHTML += '<img src="src/assets/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' plants)" onclick="upgrade.purchase('+i+')">';
+					document.getElementById("upgradeContainer").innerHTML += '<img src="src/assets/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' snowballs)" onclick="upgrade.purchase('+i+')">';
 				} else if (upgrade.type[i] == "click" && game.totalClicks >= upgrade.requirement[i]) {
-					document.getElementById("upgradeContainer").innerHTML += '<img src="src/assets/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' plants)" onclick="upgrade.purchase('+i+')">';
+					document.getElementById("upgradeContainer").innerHTML += '<img src="src/assets/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' snowballs)" onclick="upgrade.purchase('+i+')">';
 				}
 			}
             else {
@@ -209,8 +209,8 @@ var display = {
 
 function saveGame() {
 	var gameSave = {
-		plants: game.plants,
-		totalplants: game.totalplants,
+		snowballs: game.snowballs,
+		totalSnowballs: game.totalSnowballs,
 		totalClicks: game.totalClicks,
 		clickValue: game.clickValue,
 		buildingCount: building.count,
@@ -226,11 +226,11 @@ function saveGame() {
 function loadGame() {
 	var savedGame = JSON.parse(localStorage.getItem("gameSave"));
 	if (localStorage.getItem("gameSave") !== null) {
-		if (typeof savedGame.plants !== "undefined") {
-			game.plants = savedGame.plants; 
+		if (typeof savedGame.snowballs !== "undefined") {
+			game.snowballs = savedGame.snowballs; 
 		}
-		if (typeof savedGame.totalplants !== "undefined") {
-			game.totalplants = savedGame.totalplants;
+		if (typeof savedGame.totalSnowballs !== "undefined") {
+			game.totalSnowballs = savedGame.totalSnowballs;
 		}
 		if (typeof savedGame.totalClicks !== "undefined") {
 			game.totalClicks = savedGame.totalClicks;
@@ -271,20 +271,20 @@ function resetGame() {
 
 document.getElementById("clicker").addEventListener("click", function() {
 	game.totalClicks++;
-	game.addToplants(game.clickValue);
+	game.addTosnowballs(game.clickValue);
 }, false);
 
 window.onload = function() {
 	loadGame();
-	display.updateplants();
+	display.updatesnowballs();
 	display.updateUpgrades();
 	display.updateShop();
 };
 
 setInterval(() => {
-	game.plants += game.getplantsPerSecond();
-	game.totalplants += game.getplantsPerSecond();
-	display.updateplants();
+	game.snowballs += game.getsnowballsPerSecond();
+	game.totalSnowballs += game.getsnowballsPerSecond();
+	display.updatesnowballs();
 }, 1000);
 
 setInterval(function() {
@@ -292,7 +292,7 @@ setInterval(function() {
 }, 500);
 
 setInterval(() => {
-	display.updateplants();
+	display.updatesnowballs();
 	display.updateUpgrades();
 }, 10000);
 
