@@ -9,11 +9,11 @@ var game = {
 	addTosnowballs: function(amount) {
 		this.snowballs += amount;
 		this.totalSnowballs += amount;
-		display.updatesnowballs();
+		display.updateSnowballs();
 
 	},
 
-	getsnowballsPerSecond: function() {
+	getSnowballsPerSecond: function() {
 		var snowballsPerSecond = 0;
 		for (i = 0; i < building.name.length; i++) {
 			snowballsPerSecond += building.income[i] * building.count[i];
@@ -40,7 +40,7 @@ var building = {
 			game.snowballs -= this.cost[index];
 			this.count[index]++;
 			this.cost[index] = Math.ceil(this.cost[index] * 1.10);
-			display.updatesnowballs();
+			display.updateSnowballs();
 			display.updateShop();
 			display.updateUpgrades();
 		}
@@ -164,23 +164,23 @@ var upgrade = {
 				this.purchased[index] = true;
 				 
 				display.updateUpgrades();
-				display.updatesnowballs();
+				display.updateSnowballs();
 			} else if (this.type[index] == "click" && game.totalClicks >= this.requirement[index]) {
 				game.snowballs -= this.cost[index];
 				game.clickValue *= this.bonus[index];
 				this.purchased[index] = true;
 				 
 				display.updateUpgrades();
-				display.updatesnowballs();
+				display.updateSnowballs();
 			}
 		}
 	},
 };
 
 var display = {
-	updatesnowballs: () => {
+	updateSnowballs: () => {
 		document.getElementById("snowballs").innerHTML = game.snowballs;
-		document.getElementById("snowballsPerSecond").innerHTML = game.getsnowballsPerSecond();
+		document.getElementById("snowballsPerSecond").innerHTML = game.getSnowballsPerSecond();
 		document.title = game.snowballs + " snowballs - Christmas Clicker"; 
 	},
 
@@ -266,7 +266,6 @@ function resetGame() {
 	var gameSave = {};
 	localStorage.setItem("gameSave", JSON.stringify(gameSave));
 	location.reload();
-	
 }
 
 document.getElementById("clicker").addEventListener("click", function() {
@@ -276,15 +275,15 @@ document.getElementById("clicker").addEventListener("click", function() {
 
 window.onload = function() {
 	loadGame();
-	display.updatesnowballs();
+	display.updateSnowballs();
 	display.updateUpgrades();
 	display.updateShop();
 };
 
 setInterval(() => {
-	game.snowballs += game.getsnowballsPerSecond();
-	game.totalSnowballs += game.getsnowballsPerSecond();
-	display.updatesnowballs();
+	game.snowballs += game.getSnowballsPerSecond();
+	game.totalSnowballs += game.getSnowballsPerSecond();
+	display.updateSnowballs();
 }, 1000);
 
 setInterval(function() {
@@ -292,7 +291,7 @@ setInterval(function() {
 }, 500);
 
 setInterval(() => {
-	display.updatesnowballs();
+	display.updateSnowballs();
 	display.updateUpgrades();
 }, 10000);
 
