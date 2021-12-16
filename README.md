@@ -6,8 +6,8 @@ From creators of [Plant Clicker](https://nikeedev.github.io/plantclicker), Nikee
 Together with xNoobplays123 and myself( nikeedev ), we are creating new clicker game, that's going to take your christmas gaming to a new level. 
 
 #### Roles: 
-        **Scriper/Coder: @nikeedev**
-        **Designer/Pixel Art, Artist: @xNoobplays123**
+        **Dev/Coder: @nikeedev**
+        **Designer/Pixel Art, Artist and also Coder: @xNoobplays123**
 
 The real Christmas Clicker!
 
