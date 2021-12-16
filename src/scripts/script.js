@@ -220,12 +220,12 @@ function saveGame() {
 
 
 	};
-	localStorage.setItem("gameSave", JSON.stringify(gameSave));
+	localStorage.setItem("gameSaveSnow", JSON.stringify(gameSave));
 }
 
 function loadGame() {
-	var savedGame = JSON.parse(localStorage.getItem("gameSave"));
-	if (localStorage.getItem("gameSave") !== null) {
+	var savedGame = JSON.parse(localStorage.getItem("gameSaveSnow"));
+	if (localStorage.getItem("gameSaveSnow") !== null) {
 		if (typeof savedGame.snowballs !== "undefined") {
 			game.snowballs = savedGame.snowballs; 
 		}
