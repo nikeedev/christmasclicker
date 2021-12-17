@@ -4,6 +4,7 @@
 
 **Update 0.0.1-2a(16.12.2021): Added properlly functions and more snowy and christmas-cold colours. Also Updated Clicker icon.**
 
+**Update 0.0.2-1a(17.12.2021): Fixed the [bug](https://github.com/nikeedev/christmasclicker/issues/2)**
 
 **Hope you enjoy with newest features and the game itself. Cheers, Nikita!**
 
