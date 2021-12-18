@@ -264,7 +264,7 @@ function loadGame() {
 
 function resetGame() {
 	var gameSave = {};
-	localStorage.setItem("gameSave", JSON.stringify(gameSave));
+	localStorage.setItem("gameSaveSnow", JSON.stringify(gameSave));
 	location.reload();
 }
 
